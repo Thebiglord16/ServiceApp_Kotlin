@@ -1,0 +1,4 @@
+package mvi
+
+interface BaseState {
+}
