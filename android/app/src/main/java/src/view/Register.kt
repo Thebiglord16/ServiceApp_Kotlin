@@ -3,12 +3,24 @@ package src.view
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.anton46.stepsview.StepsView
 import com.example.services_app.R
 import com.example.services_app.databinding.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.completed.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.coroutines.launch
 import mvi.BaseView
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import src.adapter.UserAdapter
+import src.adapter.WorkerAdapter
+import src.intent.UserIntent
 import src.state.UserState
+import src.state.WorkerState
 import src.viewmodel.UserViewModel
 
 class Register : AppCompatActivity(), BaseView<UserState> {
@@ -31,6 +43,13 @@ class Register : AppCompatActivity(), BaseView<UserState> {
         fin = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        mViewModel.state.observe(this, Observer {
+            render(it)
+        })
+
+
+
+
 
 
 
@@ -99,8 +118,9 @@ class Register : AppCompatActivity(), BaseView<UserState> {
                 completado.Pasos.completedPosition = actual
         }}
         completado.Continue.setOnClickListener {
-            val view2 = fin.root
-            setContentView(view2)
+            lifecycleScope.launch {
+                mViewModel.intents.send(UserIntent.ChangeView)
+            }
         }
 
 
@@ -172,6 +192,17 @@ class Register : AppCompatActivity(), BaseView<UserState> {
     }
 
     override fun render(state: UserState) {
-        TODO("Not yet implemented")
+        with(state) {
+           if(state.otraView )  {
+               val mAdapter = WorkerAdapter()
+               val view2 = fin.root
+               setContentView(view2)
+
+           }
+
+            if (errorMessage != null) {
+                Toast.makeText(this@Register, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

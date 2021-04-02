@@ -7,6 +7,7 @@ import org.koin.core.context.GlobalContext.startKoin
 
 import org.koin.dsl.module
 import src.back.httpModule
+import src.back.userViewModelScope
 import src.back.workerApiModule
 import src.back.workerViewModelScope
 import src.model.WorkerApi
@@ -21,7 +22,7 @@ class App : Application() {
     private fun configureKoin() {
         startKoin {
             androidContext(this@App)
-            modules(httpModule, workerViewModelScope, workerApiModule)
+            modules(httpModule, workerViewModelScope, workerApiModule, userViewModelScope)
             }
         }
     }

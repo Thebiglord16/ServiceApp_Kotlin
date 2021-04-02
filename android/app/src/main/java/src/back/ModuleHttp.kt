@@ -1,12 +1,12 @@
 package src.back
 
 import okhttp3.OkHttpClient
-import org.koin.androidx.experimental.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import src.model.WorkerApi
+import src.viewmodel.UserViewModel
 import src.viewmodel.WorkerViewModel
 
 val httpModule= module{
@@ -34,4 +34,8 @@ val workerApiModule = module {
     }
 
     single { getWorkerApi(get()) }
+}
+
+val userViewModelScope = module{
+    viewModel { UserViewModel() }
 }

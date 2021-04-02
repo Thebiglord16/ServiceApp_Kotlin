@@ -1,9 +1,9 @@
 package src.state
 
 import mvi.BaseState
-import src.model.Worker
+import src.model.Usuario
 
-class UserState    ( val workers: List<Worker> = listOf(),
+data class UserState    (val otraView: Boolean= false,
 val isLoading: Boolean = false,
 val errorMessage: String? = null
 ) : BaseState
