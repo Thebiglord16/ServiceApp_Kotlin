@@ -6,6 +6,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.GlobalContext.startKoin
 
 import org.koin.dsl.module
+import src.back.httpModule
+import src.back.workerApiModule
+import src.back.workerViewModelScope
 import src.model.WorkerApi
 import src.viewmodel.WorkerViewModel
 
@@ -18,17 +21,7 @@ class App : Application() {
     private fun configureKoin() {
         startKoin {
             androidContext(this@App)
-            val viewModelScope = module {
-                viewModel{WorkerViewModel(get())}
+            modules(httpModule, workerViewModelScope, workerApiModule)
             }
-            val apiModule = module {
-                fun provideUserApi(): WorkerApi {
-                    return WorkerApi()
-                }
-
-                single { provideUserApi() }
-            }
-            modules(apiModule, viewModelScope)
         }
     }
-}

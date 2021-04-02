@@ -13,6 +13,7 @@ import mvi.BaseModel
 import src.intent.WorkerIntent
 import src.model.WorkerApi
 import src.state.WorkerState
+import java.lang.Exception
 
 
 class WorkerViewModel(private val workerApi: WorkerApi) : ViewModel(), BaseModel<WorkerIntent, WorkerState> {
@@ -38,8 +39,15 @@ class WorkerViewModel(private val workerApi: WorkerApi) : ViewModel(), BaseModel
 
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO) {
-            updateState { it.copy(isLoading = true) }
-            updateState { it.copy(isLoading = false, workers = workerApi.getWorkers())}
+            try {
+                updateState { it.copy(isLoading = true) }
+                updateState { it.copy(isLoading = false, workers = workerApi.getWorkers())}
+            }
+            catch (e : Exception){
+                e.printStackTrace()
+                updateState { it.copy(isLoading = false, errorMessage = e.message) }
+            }
+
 
         }
     }

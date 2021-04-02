@@ -18,8 +18,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
-            android:text="@{`usuario: ` + worker.usuario + ` nombre:` + worker.nombre}"
-            tools:text="TextView" />
+            android:text='@{"usuario:" + worker.first_name + " " + worker.last_name + "\n" + worker.worker_categoy}'
+            tools:text="TextView"
+            tools:ignore="MissingConstraints" />
 
         <View
             android:layout_width="match_parent"
