@@ -16,21 +16,24 @@ import src.intent.WorkerIntent
 import src.state.WorkerState
 import src.viewmodel.WorkerViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import src.adapter.WorkerAdapter
 
 
 class MainActivity : AppCompatActivity(), BaseView<WorkerState>{
+    private val mAdapter = WorkerAdapter()
     private val mViewModel by viewModel<WorkerViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        recyclerView.adapter = mAdapter
 
         mViewModel.state.observe(this, Observer {
             render(it)
         })
 
         lifecycleScope.launch {
-            mViewModel.intents.send(WorkerIntent.RefreshWorkers)
+            mViewModel.intents.send(WorkerIntent.FetchWorkers)
         }
 
 
@@ -45,7 +48,8 @@ class MainActivity : AppCompatActivity(), BaseView<WorkerState>{
         with(state) {
             progressBar.isVisible = isLoading
             btnRefresh.isEnabled = !isLoading
-
+            println(workers)
+            mAdapter.submitList(workers)
             if (errorMessage != null) {
                 Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_SHORT).show()
             }

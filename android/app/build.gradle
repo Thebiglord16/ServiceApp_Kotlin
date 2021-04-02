@@ -12,7 +12,9 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.example.services_app"
         minSdkVersion 24
@@ -54,6 +56,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
     // Koin Android - experimental builder extensions
     implementation "io.insert-koin:koin-android-ext:$koin_version"
+    // Koin for Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
