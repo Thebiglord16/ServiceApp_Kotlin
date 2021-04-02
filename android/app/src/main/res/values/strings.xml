@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">services_app</string>
+    <string name="signup">SignUp</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="nombre">nombre</string>
+    <string name="cedula">id number</string>
+    <string name="direccion">address</string>
+    <string name="radio">ratio</string>
+    <string name="rating">rating</string>
+    <string name="precio">price per hour</string>
+    <string name="quiero_solicitar_servicios">I want to request services</string>
+    <string name="quiero_prestar_servicios">I want to provide services</string>
+    <string name="finalizar">Finalize</string>
+    <string name="volver">Back</string>
+    <string name="todo">TODO</string>
+    <string name="Continue">continue</string>
+    <string-array name="categorias">
+        <item>PLUMBING</item>
+        <item>ELECTRICITY</item>
+        <item>CARPENTRY</item>
+        <item>GARDENING</item>
+        <item>LOCKSMITH</item>
+    </string-array>
 </resources>

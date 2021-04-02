@@ -20,7 +20,7 @@ class WorkerViewModel(private val workerApi: WorkerApi) : ViewModel(), BaseModel
     override val intents: Channel<WorkerIntent> = Channel(Channel.UNLIMITED)
     private val _state = MutableLiveData<WorkerState>().apply { value = WorkerState() }
     override val state: LiveData<WorkerState>
-    get() = _state
+        get() = _state
     init    {
         handlerIntent()
     }
@@ -28,10 +28,10 @@ class WorkerViewModel(private val workerApi: WorkerApi) : ViewModel(), BaseModel
     private fun handlerIntent(){
         viewModelScope.launch {
             intents.consumeAsFlow().collect {
-                workerIntent -> when(workerIntent){
-                    WorkerIntent.RefreshWorkers -> fetchData()
-                    WorkerIntent.FetchWorkers -> fetchData()
-                }
+                    workerIntent -> when(workerIntent){
+                WorkerIntent.RefreshWorkers -> fetchData()
+                WorkerIntent.FetchWorkers -> fetchData()
+            }
             }
         }
     }
